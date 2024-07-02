@@ -3,9 +3,9 @@ import streamlit as st
 from rcon.source import Client
 from PIL import Image
 
-server_ip = os.environ.get('MINECRAFT_SERVER_IP') or '127.0.0.1'
-server_port = os.environ.get('MINECRAFT_SERVER_PORT') or 25575
-server_password = os.environ.get('MINECRAFT_SERVER_PASSWORD')
+rcon_server = os.environ.get('MINECRAFT_SERVER') or '127.0.0.1'
+rcon_port = os.environ.get('MINECRAFT_RCON_PORT') or 25575
+rcon_password = os.environ.get('MINECRAFT_RCON_PASSWORD')
 target_player = os.environ.get('TARGET_PLAYER')
 
 img_setblock = Image.open('images/setblock.webp')
@@ -27,9 +27,12 @@ st.write('---')
 #   st.code(st.session_state.output.replace('\n', '\n'), language='html')
 
 def send_command(command):
-  with Client(server_ip, server_port, passwd=server_password) as client:
-    st.session_state.command = command
-    st.session_state.output = client.run(command)
+  try:
+    with Client(rcon_server, rcon_port, passwd=rcon_password) as client:
+      st.session_state.command = command
+      st.session_state.output = client.run(command)
+  except ConnectionError:
+    st.session_state.output = "Failed!" # may show some indicator later, but now it's just best to avoid disrupting the ui
 
 def execute_positioned(command):
   send_command(f'execute positioned as {target_player} run {command}')
