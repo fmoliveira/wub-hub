@@ -71,8 +71,15 @@ with col3:
 
 style = '''
 <style>
+/* center images and buttons in each container */
 div.element-container { text-align: center; }
 div[data-testid="stFullScreenFrame"] div { justify-content: center; }
+
+/* hide development controls + full screen button */
+.stDeployButton, #MainMenu, button[data-testid="StyledFullScreenButton"] { display: none; }
+
+/* reduce visual clutter from heading spacing */
+hr { opacity: 0; }
 </style>
 '''
 
