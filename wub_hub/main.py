@@ -12,11 +12,13 @@ rcon_server = os.environ.get('MINECRAFT_SERVER') or '127.0.0.1'
 rcon_port = os.environ.get('MINECRAFT_RCON_PORT') or 25575
 rcon_password = os.environ.get('MINECRAFT_RCON_PASSWORD')
 target_player = os.environ.get('TARGET_PLAYER')
+home_coordinates = os.environ.get('HOME_COORDINATES')
 
 # load ui images
 img_setblock = Image.open('images/setblock.webp')
 img_light = Image.open('images/light.webp')
 img_barrier = Image.open('images/barrier.webp')
+img_home = Image.open('images/home.webp')
 
 # initialize empty app state placeholders
 if 'init' not in st.session_state:
@@ -83,8 +85,11 @@ if show_debug:
 # visual fluff
 st.write('---')
 
-# prepare layout columns
-col1, col2, col3 = st.columns(3)
+# prepare layout with variable number of columns
+if home_coordinates:
+  col1, col2, col3, col4 = st.columns(4)
+else:
+  col1, col2, col3 = st.columns(3)
 
 # render helper buttons in the screen
 with col1:
@@ -98,6 +103,12 @@ with col2:
 with col3:
   st.image(img_barrier)
   st.button('BARRIER', on_click=cmd_barrier)
+
+# if home coordinates are configured, then display an additional button to teleport back home
+if home_coordinates:
+  with col4:
+    st.image(img_home)
+    st.button('HOME', on_click=cmd_home)
 
 # css hacks to workaround streamlit limitations and touch up the layout a little bit
 style = '''

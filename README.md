@@ -24,6 +24,7 @@ Set the environment variables below before launching the app:
 - `MINECRAFT_RCON_PORT`: the port of your Minecraft RCON server.
 - `MINECRAFT_RCON_PASSWORD`: the password of your Minecraft RCON server.
 - `TARGET_PLAYER`: the name of the player you want to target in the helper actions.
+- `HOME_COORDINATES`: optional, can be set to the overworld coordinates of the player home in the format `-50 120 85`. if configured, the app will display an additional button to teleport into these coordinates.
 
 ## Usage
 
