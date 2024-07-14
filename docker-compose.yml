@@ -1,0 +1,20 @@
+networks:
+  mcwub:
+    external: false
+
+services:
+  wub-hub:
+    build: .
+    restart: unless-stopped
+
+    networks:
+      - mcwub
+
+    ports:
+      - "7588:8501"
+
+    environment:
+      ENVIRONMENT: "production"
+      MINECRAFT_SERVER: "minecraft-server"
+      MINECRAFT_RCON_PASSWORD: ${MINECRAFT_RCON_PASSWORD}
+      TARGET_PLAYER: ${MINECRAFT_RCON_PLAYER}
