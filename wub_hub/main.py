@@ -49,7 +49,7 @@ def cmd_list():
   send_command('list')
 
 def cmd_setblock():
-  execute_positioned('setblock ~ ~ ~ minecraft:shroomlight')
+  execute_positioned('setblock ~ ~ ~ minecraft:shroomlight keep')
 
 def cmd_light():
   execute_as('give @s minecraft:light')
