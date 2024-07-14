@@ -2,6 +2,8 @@
 
 Simple rcon dashboard with minecraft helpers for kids playing on creative mode.
 
+![Interface of the wub hub dashboard featuring buttons to help kids play in the creative mode](.demo/wubhub-preview.png)
+
 ## Requirements
 
 - Python 3.8+
