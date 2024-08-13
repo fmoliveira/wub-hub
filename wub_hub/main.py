@@ -18,6 +18,7 @@ home_coordinates = os.environ.get('HOME_COORDINATES')
 img_setblock = Image.open('images/setblock.webp')
 img_light = Image.open('images/light.webp')
 img_barrier = Image.open('images/barrier.webp')
+img_command_block = Image.open('images/command_block.webp')
 img_home = Image.open('images/home.webp')
 
 # initialize empty app state placeholders
@@ -70,6 +71,9 @@ def cmd_home():
   execute_as(f'execute in minecraft:overworld run tp @s {home_coordinates}')
 
 # extra utilities for messing around
+def cmd_command_block():
+  execute_as('give @s minecraft:command_block')
+
 def cmd_help():
   send_command('help')
 
@@ -87,9 +91,9 @@ st.write('---')
 
 # prepare layout with variable number of columns
 if home_coordinates:
-  col1, col2, col3, col4 = st.columns(4)
+  col1, col2, col3, col4, col5 = st.columns(5)
 else:
-  col1, col2, col3 = st.columns(3)
+  col1, col2, col3, col4 = st.columns(4)
 
 # render helper buttons in the screen
 with col1:
@@ -104,9 +108,13 @@ with col3:
   st.image(img_barrier)
   st.button('BARRIER', on_click=cmd_barrier)
 
+with col4:
+  st.image(img_command_block)
+  st.button('COMMAND BLOCK', on_click=cmd_command_block)
+
 # if home coordinates are configured, then display an additional button to teleport back home
 if home_coordinates:
-  with col4:
+  with col5:
     st.image(img_home)
     st.button('HOME', on_click=cmd_home)
 
