@@ -22,6 +22,7 @@ services:
       MINECRAFT_SERVER: "minecraft-server"
       MINECRAFT_RCON_PASSWORD: ${MINECRAFT_RCON_PASSWORD}
       TARGET_PLAYER: ${MINECRAFT_RCON_PLAYER}
+      HOME_COORDINATES: ${HOME_COORDINATES}
 
     labels:
       xyz.nordicful.port: 8501
