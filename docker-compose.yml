@@ -1,20 +1,30 @@
 networks:
   mcwub:
-    external: false
+    external: true
+  nordicful_bridge:
+    external: true
 
 services:
   wub-hub:
     build: .
     restart: unless-stopped
+    container_name: wub-hub
 
     networks:
       - mcwub
+      - nordicful_bridge
 
-    ports:
-      - "7588:8501"
+    expose:
+      - 8501
 
     environment:
       ENVIRONMENT: "production"
       MINECRAFT_SERVER: "minecraft-server"
       MINECRAFT_RCON_PASSWORD: ${MINECRAFT_RCON_PASSWORD}
       TARGET_PLAYER: ${MINECRAFT_RCON_PLAYER}
+
+    labels:
+      xyz.nordicful.port: 8501
+      xyz.nordicful.kind: service
+      xyz.nordicful.access: protected
+      xyz.nordicful.subdomain: hub
